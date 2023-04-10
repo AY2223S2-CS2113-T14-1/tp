@@ -9,6 +9,7 @@ public class InvalidArgumentException extends Exception {
     private final String invalidArgument;
 
     public InvalidArgumentException(String invalidArgument) {
+        super(invalidArgument);
         this.invalidArgument = invalidArgument;
     }
 

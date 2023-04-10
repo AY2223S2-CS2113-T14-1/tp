@@ -2,6 +2,7 @@ package seedu.commands.workoutcommands;
 
 import seedu.commands.Command;
 
+import static seedu.ui.Ui.showLineAfterEachCommand;
 import static seedu.workout.WorkoutList.NO_CURRENT_WORKOUT;
 
 //@@author calebcjl
@@ -19,8 +20,8 @@ public class EndWorkoutCommand extends Command {
      * Ends the current workout.
      * If there is no current workout ongoing, no workout will be ended.
      *
-     * @return Returns workout completed message if current workout is ended. Returns no current workout
-     *     message otherwise.
+     * @return Returns workout completed message if current workout is ended.
+     *
      */
     @Override
     public String execute() {
@@ -28,6 +29,8 @@ public class EndWorkoutCommand extends Command {
             return NO_CURRENT_WORKOUT_MESSAGE;
         }
         workoutList.setCurrentWorkoutIndex(NO_CURRENT_WORKOUT);
-        return WORKOUT_COMPLETE_MESSAGE;
+
+        return showLineAfterEachCommand(WORKOUT_COMPLETE_MESSAGE);
+
     }
 }

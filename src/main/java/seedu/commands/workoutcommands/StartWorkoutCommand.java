@@ -3,6 +3,7 @@ package seedu.commands.workoutcommands;
 import seedu.commands.Command;
 import seedu.exceptions.InvalidArgumentException;
 import seedu.parser.DateFormatter;
+import seedu.ui.Ui;
 
 import java.util.Date;
 
@@ -44,6 +45,6 @@ public class StartWorkoutCommand extends Command {
             return ONGOING_WORKOUT_MESSAGE;
         }
         workoutList.startWorkout(date, workoutName);
-        return workoutName + " started on " + DateFormatter.dateToString(date) + '.';
+        return Ui.showLineAfterEachCommand(workoutName + " started on " + DateFormatter.dateToString(date) + '.');
     }
 }

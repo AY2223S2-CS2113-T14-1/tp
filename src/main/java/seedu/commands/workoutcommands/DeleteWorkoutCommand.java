@@ -3,6 +3,7 @@ package seedu.commands.workoutcommands;
 import seedu.commands.Command;
 import seedu.exceptions.InvalidArgumentException;
 import seedu.parser.DateFormatter;
+import seedu.ui.Ui;
 import seedu.workout.WorkoutList;
 
 import java.util.Date;
@@ -40,7 +41,8 @@ public class DeleteWorkoutCommand extends Command {
         String workoutName = workoutList.getWorkout(workoutToDeleteIndex).getWorkoutName();
         Date workoutDate = workoutList.getWorkout(workoutToDeleteIndex).getDate();
         workoutList.deleteWorkout(workoutToDeleteIndex);
-        return "Deleted " + workoutName + " on " + DateFormatter.dateToString(workoutDate) + '.';
+        return Ui.showLineAfterEachCommand("Deleted " + workoutName + " on " +
+                DateFormatter.dateToString(workoutDate) + '.');
     }
 }
 

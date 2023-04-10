@@ -1,6 +1,7 @@
 package seedu.commands.workoutcommands;
 
 import seedu.commands.Command;
+import seedu.ui.Ui;
 
 import java.util.Date;
 
@@ -15,6 +16,6 @@ public class CountSetsRepsCommand extends Command {
 
     @Override
     public String execute() {
-        return workoutList.countSetsReps(dayInSpecificWeekDate);
+        return Ui.showLineAfterEachCommand(workoutList.countSetsReps(dayInSpecificWeekDate));
     }
 }

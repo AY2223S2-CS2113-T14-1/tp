@@ -9,6 +9,7 @@ public class InvalidSyntaxException extends Exception {
     private final String syntaxError;
 
     public InvalidSyntaxException(String syntaxError) {
+        super(syntaxError);
         this.syntaxError = syntaxError;
     }
 

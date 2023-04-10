@@ -33,6 +33,6 @@ public class ListCaloriesCommand extends Command {
                     .append(sortedMap.get(date).getTotalCalories()).append("kcal").append(System.lineSeparator());
             counter += 1;
         }
-        return stringBuilder.append(Ui.line()).toString();
+        return Ui.showLineAfterEachCommand(stringBuilder.append(Ui.line()).toString());
     }
 }
