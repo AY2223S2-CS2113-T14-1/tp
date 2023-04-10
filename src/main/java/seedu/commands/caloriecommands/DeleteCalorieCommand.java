@@ -5,6 +5,7 @@ import seedu.commands.Command;
 import seedu.exceptions.InvalidArgumentException;
 import seedu.exceptions.InvalidSyntaxException;
 import seedu.parser.DateFormatter;
+import seedu.ui.Ui;
 
 import java.util.Date;
 
@@ -34,7 +35,8 @@ public class DeleteCalorieCommand extends Command {
         }
         Food deletedFood = calorieTracker.getDailyFoodConsumption().get(date).getFood(index);
         calorieTracker.getDailyFoodConsumption().get(date).deleteFood(index);
-        return "Deleted " + deletedFood.getFoodName() + "(" + deletedFood.getCalories() + " kcal) from "
-                + DateFormatter.dateToString(date);
+        return Ui.showLineAfterEachCommand("Deleted " + deletedFood.getFoodName()
+                + "(" + deletedFood.getCalories() + " kcal) from "
+                + DateFormatter.dateToString(date));
     }
 }

@@ -32,6 +32,6 @@ public class ViewCaloriesCommand extends Command {
                     .append(food.getCalories()).append("kcal").append(System.lineSeparator());
             counter += 1;
         }
-        return stringBuilder.append(Ui.line()).toString();
+        return Ui.showLineAfterEachCommand(stringBuilder.append(Ui.line()).toString());
     }
 }

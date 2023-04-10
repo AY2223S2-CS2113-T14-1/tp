@@ -124,8 +124,18 @@ public class Ui {
         return HELP_MESSAGE_CALORIES;
     }
 
-    public static void setInput(String userInput) {
 
+    public static void showLine(){
+        System.out.println(LINE);
+    }
+    public static void printErrorMessage(String message) {
+        showLine();
+        System.out.println(message);
+        showLine();
+    }
+
+    public static String showLineAfterEachCommand(String message){
+        return LINE + System.lineSeparator() + message + System.lineSeparator() + LINE;
     }
 
 }

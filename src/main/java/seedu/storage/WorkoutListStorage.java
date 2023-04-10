@@ -1,5 +1,6 @@
 package seedu.storage;
 
+//@@ author ZIZI-czh
 import seedu.parser.DateFormatter;
 import seedu.ui.Ui;
 import seedu.workout.Exercise;
@@ -13,7 +14,7 @@ import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-//@@author ZIZI-czh
+
 /**
  * Represents a storage for WorkoutList.
  */

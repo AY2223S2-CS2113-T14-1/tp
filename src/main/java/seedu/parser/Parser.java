@@ -3,17 +3,40 @@ package seedu.parser;
 import seedu.commands.Command;
 import seedu.commands.ExitCommand;
 import seedu.commands.caloriecommands.HelpCaloriesCommand;
-import seedu.commands.errorcommands.InvalidCommand;
 import seedu.commands.workoutcommands.HelpWorkoutCommand;
-import seedu.exceptions.InvalidArgumentException;
-import seedu.exceptions.InvalidSyntaxException;
 
 import java.text.ParseException;
 import java.util.Date;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import static seedu.exceptions.message.Messages.MESSAGE_MISSING_ARGUMENT;
+import static seedu.exceptions.message.Messages.MESSAGE_COMMAND_UNRECOGNIZABLE;
+import static seedu.exceptions.message.Messages.MESSAGE_INVALID_DATE_FORMAT;
+import static seedu.exceptions.message.Messages.MESSAGE_CONTAIN_MULTI_SLASH;
+import static seedu.exceptions.message.Messages.MESSAGE_INCORRECT_DAY_OR_MONTH;
+import static seedu.exceptions.message.Messages.MESSAGE_INCORRECT_YEAR;
+import seedu.exceptions.MultiSlashErrorException;
+import seedu.exceptions.InvalidSyntaxException;
+import seedu.exceptions.CommandNotFoundException;
+import seedu.exceptions.InvalidYearException;
+import seedu.exceptions.InvalidExerciseNameException;
+import seedu.exceptions.InvalidArgumentException;
+import seedu.exceptions.InvalidWeightException;
+import seedu.exceptions.InvalidCaloriesException;
+import seedu.exceptions.InvalidDateFormatException;
+import seedu.exceptions.InvalidDayAndMonthException;
+import seedu.exceptions.MissingArgumentException;
+import seedu.exceptions.InvalidNumberForRepsException;
+import seedu.exceptions.InvalidIndexException;
+import seedu.exceptions.EmptyWeightException;
+import seedu.exceptions.IncorrectWaddCommandException;
+import seedu.exceptions.InvalidNumberForWeightException;
+import seedu.exceptions.InvalidUnitForWeightException;
+import seedu.exceptions.MultiArgumentDetectedException;
+
 //@@author calebcjl
+
 /**
  * Represents the main parser that parses user commands.
  */
@@ -21,10 +44,20 @@ public class Parser {
     private static final Pattern BASIC_COMMAND_FORMAT =
             Pattern.compile("(?<commandName>\\S+)(?<arguments>.*)");
 
+
+    public static Command processCommand(String userInput) throws InvalidSyntaxException,
+            InvalidArgumentException, CommandNotFoundException, MultiSlashErrorException, InvalidDateFormatException,
+            InvalidDayAndMonthException, InvalidYearException, MissingArgumentException, InvalidExerciseNameException,
+            InvalidWeightException, InvalidNumberForRepsException, EmptyWeightException, InvalidUnitForWeightException,
+            InvalidNumberForWeightException, IncorrectWaddCommandException, InvalidIndexException,
+            MultiArgumentDetectedException, InvalidCaloriesException {
+
     public static Command parseCommand(String userInput) throws InvalidSyntaxException, InvalidArgumentException {
+
         Matcher matcher = BASIC_COMMAND_FORMAT.matcher(userInput.trim());
+
         if (!matcher.matches()) {
-            throw new InvalidSyntaxException("user input");
+            throw new MissingArgumentException(MESSAGE_MISSING_ARGUMENT);
         }
 
         String commandName = matcher.group("commandName");
@@ -61,7 +94,7 @@ public class Parser {
         case "/exit":
             return new ExitCommand();
         default:
-            return new InvalidCommand(commandName);
+            throw new CommandNotFoundException(MESSAGE_COMMAND_UNRECOGNIZABLE);
         }
     }
 
@@ -72,18 +105,36 @@ public class Parser {
      * @return return null if the date format is invalid
      */
     //@@ author ZIZI-czh
-    static Date parseDate(String arguments) throws InvalidSyntaxException, InvalidArgumentException {
+    static Date parseDate(String arguments) throws InvalidDateFormatException,
+            MultiSlashErrorException, InvalidYearException, InvalidDayAndMonthException {
         arguments = arguments.trim();
         Date enteredDate;
         try {
             enteredDate = DateFormatter.stringToDate(arguments);
         } catch (ParseException e) {
-            throw new InvalidSyntaxException("date");
+            throw new InvalidDateFormatException(MESSAGE_INVALID_DATE_FORMAT);
         }
-        Date currentDate = new Date();
-        if (enteredDate.compareTo(currentDate) > 0) {
-            throw new InvalidArgumentException("date");
+
+        String[] dateParts = arguments.trim().split("/", 3);
+        for (String part : dateParts) {
+            if (part.contains("/")) {
+                throw new MultiSlashErrorException(MESSAGE_CONTAIN_MULTI_SLASH);
+            }
         }
+        int day;
+        int month;
+        int year;
+
+        day = Integer.parseInt(dateParts[0].trim());
+        month = Integer.parseInt(dateParts[1].trim());
+        year = Integer.parseInt(dateParts[2].trim());
+        if (day < 1 || day > 31 || month < 1 || month > 12) {
+            throw new InvalidDayAndMonthException(MESSAGE_INCORRECT_DAY_OR_MONTH);
+        }
+        if (year < 0 || (year > 23 && year < 1000) || year > 2023) {
+            throw new InvalidYearException(MESSAGE_INCORRECT_YEAR);
+        }
+
         return enteredDate;
     }
 }

@@ -1,12 +1,12 @@
 package seedu.commands.workoutcommands;
 
+//@@ author ZIZI-czh
 import seedu.commands.Command;
 import seedu.parser.DateFormatter;
 import seedu.ui.Ui;
 import seedu.workout.Workout;
 import seedu.workout.WorkoutList;
 
-//@@ author ZIZI-czh
 /**
  * This is the class for executing the list command
  */
@@ -46,7 +46,7 @@ public class ListWorkoutCommand extends Command {
             listOfWorkouts.append(listNumber).append(date).append(workoutName).append(System.lineSeparator());
             counter += 1;
         }
-        return listOfWorkouts.append(Ui.line()).toString();
+        return Ui.showLineAfterEachCommand(listOfWorkouts.append(Ui.line()).toString());
     }
 }
 

@@ -1,11 +1,10 @@
 package seedu.commands.workoutcommands;
 
+//@@ author ZIZI-czh
 import seedu.commands.Command;
 import seedu.exceptions.InvalidArgumentException;
 import seedu.workout.Workout;
 import seedu.workout.WorkoutList;
-
-//@@ author ZIZI-czh
 
 /**
  * View the workout on current date

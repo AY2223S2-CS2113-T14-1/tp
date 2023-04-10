@@ -1,6 +1,7 @@
 package seedu.commands.workoutcommands;
 
 import seedu.commands.Command;
+import seedu.ui.Ui;
 import seedu.workout.Exercise;
 import seedu.workout.Workout;
 
@@ -32,6 +33,6 @@ public class AddExerciseCommand extends Command {
         }
         Workout currentWorkout = workoutList.getCurrentWorkout();
         currentWorkout.addExercise(exerciseToAdd);
-        return exerciseToAdd + EXERCISE_ADDED_MESSAGE;
+        return Ui.showLineAfterEachCommand(exerciseToAdd + EXERCISE_ADDED_MESSAGE);
     }
 }

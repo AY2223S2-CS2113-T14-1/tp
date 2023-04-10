@@ -1,0 +1,7 @@
+package seedu.exceptions;
+
+public class CommandNotFoundException extends DukeException{
+    public CommandNotFoundException(String message) {
+        super(message);
+    }
+}
