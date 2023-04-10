@@ -241,25 +241,6 @@ Step 3. If `currentWorkoutIndex` indicates that there is an ongoing workout. It 
 `WorkList#getCurrentWorkout()` and `Workout#addExercise` to add the `Exercise`, toAdd, to the current workout.
 It then lets the user know that the exercise has been added.
 
-#### End Workout
-
-The end mechanism is facilitated by `EndWorkoutCommand`.
-It extends `Command` and modifies the execute function to end the current workout.
-
-<img src="images/EndWorkoutCommandDiagram.png" width="850" height="550"/>
-
-Given below is an example usage scenario and how the start mechanism behaves at each step.
-
-Step 1. When `EndWorkoutCommand#execute()` is called, `EndWorkoutCommand` calls `WorkList#getCurrentWorkout()`
-to get `currentWorkoutIndex`.
-
-Step 2. If `currentWorkoutIndex` indicates that there is no ongoing workout, `EndWorkoutCommand` returns a message
-that there is no ongoing workout to end.
-
-Step 3. If `currentWorkoutIndex` indicates that there is an ongoing workout. It resets the `currentWorkoutIndex` with
-`WorkoutList#setCurrentWorkoutIndex(NO_CURRENT_WORKOUT)` indicating that there is no longer any ongoing workouts, and
-returns a message that the workout has ended.
-
 #### List workout
 
 The list mechanism is facilitated by 'Parser', 'ListCommand', 'WorkoutList' and 'UI', where a Workout object will be
